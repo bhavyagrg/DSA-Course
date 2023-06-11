@@ -17,12 +17,22 @@ public:
 
     void push(int value)
     {
+        if (top == n - 1)
+        {
+            cout << "Overflow\n";
+            return;
+        }
         top++;
         arr[top] = value;
     }
 
     int pop()
     {
+        if (top == -1)
+        {
+            cout << "Underflow\n";
+            return -1;
+        }
         int ans = arr[top];
         top--;
         return ans;
@@ -30,6 +40,11 @@ public:
 
     int peek()
     {
+        if (top == -1)
+        {
+            cout << "No element present\n";
+            return -1;
+        }
         return arr[top];
     }
 
@@ -47,6 +62,8 @@ public:
 int main()
 {
     MyStack s(5);
+    s.pop();
+    s.peek();
     s.push(5);
     s.push(10);
     s.push(20);
@@ -55,6 +72,10 @@ int main()
     std::cout << s.size() << "\n ";
     std::cout << s.peek() << "\n ";
     std::cout << s.isEmpty() << std::endl;
-
+    s.push(10);
+    s.push(40);
+    s.push(30);
+    s.push(40);
+    s.push(50);
     return 0;
 }
