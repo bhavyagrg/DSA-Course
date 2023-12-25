@@ -2,31 +2,27 @@
 #include<vector>
 using namespace std;
 
-void printS(vector<int>& arr,vector<int>& ds,int idx,int n,int sum,int s)
+int printS(vector<int>& arr,vector<int>& ds,int idx,int n,int sum,int s)
 {
     if(idx == n)
     {
         if(s == sum)
         {
-            for(auto& el : ds)
-            {
-                cout<<el<<" ";
-            }
-            cout<<endl;
+            return 1;
         }
 
-        return;
+        return 0;
     }
 
     s += arr[idx];
     ds.emplace_back(arr[idx]);
-    printS(arr,ds,idx + 1,n,sum,s);
+    int l = printS(arr,ds,idx + 1,n,sum,s); 
 
     s -= arr[idx];
     ds.pop_back();
-    printS(arr,ds,idx + 1,n,sum,s);
+    int r = printS(arr,ds,idx + 1,n,sum,s);
 
-    return;
+    return l + r;
 }
 
 int main()
@@ -48,7 +44,7 @@ int main()
     cout<<"Enter the target : ";
     cin>>target;
 
-    printS(arr,ds,0,(int)arr.size(),target,0);
+    cout<<printS(arr,ds,0,(int)arr.size(),target,0);
 
     return 0;
 }
